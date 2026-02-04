@@ -1,10 +1,29 @@
 
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import pokemon from './schema/pokemon.js';
 
 import './connect.js';
 
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const glbDir = path.join(__dirname, 'assets', 'gltf_pokemons');
+
+app.use('/glb', (req, res, next) => {
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+  next();
+});
+
+app.use('/glb', express.static(glbDir, {
+  setHeaders(res, filePath) {
+    if (filePath.endsWith('.glb')) {
+      res.set('Content-Type', 'model/gltf-binary');
+    }
+  }
+}));
 
 app.get('/', (req, res) => {
   res.send('Hello, World!');
