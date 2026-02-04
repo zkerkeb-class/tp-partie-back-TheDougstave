@@ -1,16 +1,27 @@
 {
   "name": "pokemon_groupe_1_backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/zkerkeb/pokemon_groupe_1_backend#readme",
+  "bugs": {
+    "url": "https://github.com/zkerkeb/pokemon_groupe_1_backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zkerkeb/pokemon_groupe_1_backend.git"
+  },
+  "license": "ISC",
+  "author": "",
   "type": "module",
+  "main": "index.js",
   "scripts": {
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "mongoose": "^9.1.5",
+    "nodemon": "^3.1.11"
   }
 }
