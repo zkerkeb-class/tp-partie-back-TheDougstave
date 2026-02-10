@@ -12,8 +12,7 @@ HEADERS = {"Accept": "application/json"}
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-def list_files(path):
-    """Liste récursive des fichiers dans un dossier GitLab"""
+def list_files(path): # a changer en 151 pour les autres (ou alors verifier si je peux recup directement les glb autre part)
     url = f"{API_BASE}/projects/{PROJECT_ID.replace('/', '%2F')}/repository/tree"
     params = {
         "path": path,
@@ -32,7 +31,6 @@ def list_files(path):
 
 
 def download_file(file_path):
-    """Télécharge un fichier depuis GitLab"""
     encoded_path = file_path.replace("/", "%2F")
     url = f"{API_BASE}/projects/{PROJECT_ID.replace('/', '%2F')}/repository/files/{encoded_path}/raw"
     params = {"ref": BRANCH}
