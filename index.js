@@ -16,6 +16,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const imgDir = path.join(__dirname, "assets", "pokemons");        // id.png
 const glbDir = path.join(__dirname, "assets", "gltf_pokemons");   // english_name.glb
 const bgDir = path.join(__dirname, "assets", "bg"); // Fire.jpg, Water.jpg, ...
+const typeIconsDir = path.join(__dirname, "assets", "types"); // Fire.png, Water.png, ...
+
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -144,6 +146,19 @@ app.use(
     },
   })
 );
+
+// Types icons : /type/Fire.png ou /type/Fire
+app.get("/type/:type", (req, res) => {
+  try {
+    const t = String(req.params.type || "");
+    const file = t.toLowerCase().endsWith(".png") ? t : `${t}.png`;
+    res.sendFile(path.join(typeIconsDir, file));
+  } catch {
+    res.status(404).end();
+  }
+});
+
+
 
 // Backgrounds : /assets/backgrounds/Fire.jpg
 app.use("/assets/backgrounds", express.static(bgDir));
